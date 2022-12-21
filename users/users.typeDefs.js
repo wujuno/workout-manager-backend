@@ -1,21 +1,29 @@
 import { gql } from "apollo-server";
 
-
 export default gql`
-    type Workout {
-            id:Int!
-            items:String
-            createdAt: String!
-            updateAt: String!
-            owner: String
+    type User {
+        id: Int!
+        firstName: String!
+        lastName: String
+        username: String!
+        email: String!
+        createdAt: String!
+        updatedAt: String!
     }
     type Query {
-        workouts:[Workout]
-        workout(id:Int!):Workout
+        seeProfile(username: String!): User! 
+    }
+    type CreateAccountResult {
+        ok: Boolean!
+        error: String
     }
     type Mutation {
-        createWorkout(items:String,owner:String):Workout
-        deleteWorkout(id:Int!):Workout
-        updateWorkout(id:Int! items:String!):Workout
+        createAccount(
+            firstName: String!
+            lastName: String
+            username: String!
+            email: String!
+            password: String!
+        ): CreateAccountResult!
     }
 `;

@@ -2,9 +2,8 @@
   "name": "workout-manager-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon --exec babel-node server"
   },
   "keywords": [],
   "author": "",
@@ -14,7 +13,9 @@
     "graphql": "^16.6.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/node": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
     "nodemon": "^2.0.20"
-  },
-  "type":"module"
+  }
 }

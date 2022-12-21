@@ -3,12 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "nodemon --exec babel-node server"
+    "dev": "nodemon --exec babel-node server",
+    "migrate" : "npx prisma migrate dev"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^4.8.0",
     "apollo-server": "^3.11.1",
     "graphql": "^16.6.0"
   },
@@ -16,6 +18,7 @@
     "@babel/core": "^7.20.5",
     "@babel/node": "^7.20.5",
     "@babel/preset-env": "^7.20.2",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "prisma": "^4.8.0"
   }
 }

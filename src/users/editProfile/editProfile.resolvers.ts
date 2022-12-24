@@ -1,30 +1,30 @@
-import bcrypt from "bcrypt"
-import client from "../../client"
+import *as bcrypt from "bcrypt"
+import { Resolvers } from "../../type";
 import { protectedResolver } from "../users.utils"
 
 
-export default {
+const resolvers:Resolvers = {
     Mutation: {
         editProfile: protectedResolver(
             async(_,
                 {firstName,
                 lastName,
-                userName,
+                username,
                 email,
                 password:newPassword},
-                {loggedInUser}) => {
-                let uglyPassword = null;
+                {loggedInUser,client}) => {
+                let uglyPassword:string | null = null;
                 if(newPassword) {
                     uglyPassword = await bcrypt.hash(newPassword,10);
                 }
                 const updatedUser = await client.user.update({
                     where:{
-                        id:loggedInUser.id
+                        id:loggedInUser?.id
                     },
                     data:{
                         firstName,
                         lastName,
-                        userName,
+                        username,
                         email,
                         ...(uglyPassword && {password:uglyPassword})
                     }
@@ -44,3 +44,5 @@ export default {
         )
     }
 }
+
+export default resolvers;

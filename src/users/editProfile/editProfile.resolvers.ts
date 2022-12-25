@@ -11,34 +11,41 @@ const resolvers:Resolvers = {
                 lastName,
                 username,
                 email,
-                password:newPassword},
+                password:newPassword,
+                bio,
+                avatar:newAvatar},
                 {loggedInUser,client}) => {
-                let uglyPassword:string | null = null;
-                if(newPassword) {
-                    uglyPassword = await bcrypt.hash(newPassword,10);
-                }
-                const updatedUser = await client.user.update({
-                    where:{
-                        id:loggedInUser?.id
-                    },
-                    data:{
-                        firstName,
-                        lastName,
-                        username,
-                        email,
-                        ...(uglyPassword && {password:uglyPassword})
+                    let avatarUrl = null
+                    if(newAvatar){
+                        const newFilename= ""
+                        avatarUrl = `http://localhost:4000/static/${newFilename}`
+                    }   
+                    let uglyPassword:string | null = null;
+                    if(newPassword) {
+                        uglyPassword = await bcrypt.hash(newPassword,10);
                     }
-                })
-                if(updatedUser.id){
-                    return {
-                        ok:true
+                    const updatedUser = await client.user.update({
+                        where:{
+                            id:loggedInUser?.id
+                        },
+                        data:{
+                            firstName,
+                            lastName,
+                            username,
+                            email,
+                            ...(uglyPassword && {password:uglyPassword})
+                        }
+                    })
+                    if(updatedUser.id){
+                        return {
+                            ok:true
+                        }
+                    } else {
+                        return {
+                            ok: false,
+                            error: "Could not update profile."
+                        }
                     }
-                } else {
-                    return {
-                        ok: false,
-                        error: "Could not update profile."
-                    }
-                }
     
                 }
         )

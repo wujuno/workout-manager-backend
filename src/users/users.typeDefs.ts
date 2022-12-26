@@ -11,6 +11,7 @@ export default gql`
         avatar: String
         createdAt: String!
         updatedAt: String!
+        isMe: Boolean!
     }
 
 `;

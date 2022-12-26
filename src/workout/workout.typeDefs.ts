@@ -7,7 +7,7 @@ export default gql`
             items:String
             createdAt: String!
             updateAt: String!
-            owner: String
+            owner: [User!]!
     }
     type Query {
         workouts:[Workout]

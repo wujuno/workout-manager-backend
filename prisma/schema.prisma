@@ -10,12 +10,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Workout {
+model Record {
   id        Int      @id @default(autoincrement())
-  items     String?
+  date      String
+  owner     User     @relation(fields: [userId], references: [id])
+  userId    Int
+  items     Item[]
   createdAt DateTime @default(now())
   updateAt  DateTime @updatedAt
-  owner     String?
+}
+
+model Item {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  times     Int?
+  setTimes  Int?
+  weight    Int?
+  restTime  Int?
+  belong    Record[]
+  createdAt DateTime @default(now())
+  updateAt  DateTime @updatedAt
 }
 
 model User {
@@ -27,6 +41,7 @@ model User {
   password  String
   bio       String?
   avatar    String?
+  records   Record[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

@@ -1,8 +1,13 @@
 import { Resolvers } from "../../type";
+import { protectedResolver } from "../../users/users.utils";
 
 const resolvers:Resolvers ={
     Query:{
-        seeRecord: (_,{id},{client})=> client.record.findUnique({where:{id}})
+        seeRecords: protectedResolver(
+            async(_,__,{client,loggedInUser})=> await client.record.findMany({where:{userId:loggedInUser.id}})
+                
+            
+        )
     }
 }
 

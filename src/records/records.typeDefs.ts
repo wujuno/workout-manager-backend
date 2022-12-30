@@ -12,11 +12,18 @@ export default gql`
     type Item {
         id: Int!
         name: String!
+        belong: [Record]
+        count:[Count]
+        createdAt: Int!
+        updateAt: Int!
+    }
+    type Count {
+        id: Int!
+        belong: Item!
         times: Int
         setTimes: Int
         weight: Int
         restTime: Int
-        belong: [Record]
         createdAt: Int!
         updateAt: Int!
     }

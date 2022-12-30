@@ -7,6 +7,12 @@ export default gql`
         record: Record!
     }
     type Mutation {
-        createRecord(date:String item:String):CreateRecordResult!
+        createRecord(
+            date:String 
+            item:String 
+            times:Int,
+            setTimes:Int,
+            weight:Int,
+            restTime:Int):CreateRecordResult!
     }
 `;

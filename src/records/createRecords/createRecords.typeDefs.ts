@@ -4,7 +4,6 @@ export default gql`
     type CreateRecordResult {
         ok: Boolean!
         error: String
-        record: Record!
     }
     type Mutation {
         createRecord(

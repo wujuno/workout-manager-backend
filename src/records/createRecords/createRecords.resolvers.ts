@@ -6,20 +6,15 @@ const resolvers:Resolvers = {
         createRecord:protectedResolver(
             async(_,{date,item,times,setTimes,weight,restTime},
                 {loggedInUser,client})=>{
-                let updateRecord = null;
-                let newRecord = null;
-                const isdate = await client.record.findUnique({where:{date},select:{id:true}})                
-                if(isdate){
-                    updateRecord = await client.record.update({
-                        where:{id:isdate.id},
-                        data:{
-                            items:{
-                                connectOrCreate: [{where:{name:item},create:{name:item}}]
-                            }
-                        }
-                    })
-                } else {
-                    newRecord = await client.record.create(
+                const newItem = await client.item.create({
+                    data:{
+                        name:item,
+                        times,
+                        setTimes,
+                        weight,
+                        restTime
+                }})
+                const newRecord = await client.record.create(
                         {data:{
                             date,
                             owner :{
@@ -27,17 +22,15 @@ const resolvers:Resolvers = {
                                     id:loggedInUser.id
                                 }
                             },
-                            ...(item && {items:{
-                                connectOrCreate: [{where:{name:item,},create:{name:item,}}]
-
-                            }}),
-                        }}
-                    )
-                }
-                
+                            items:{
+                                connect:{
+                                    id: newItem.id
+                                }
+                            }
+                            }});
                 return {
                     ok: true,
-                    record: isdate ? updateRecord : newRecord
+                    record:newRecord
                 }
             }
         )

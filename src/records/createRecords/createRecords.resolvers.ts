@@ -3,7 +3,7 @@ import { protectedResolver } from "../../users/users.utils";
 
 const resolvers:Resolvers = {
     Mutation:{
-        createRecord:protectedResolver(
+        organizeRecord:protectedResolver(
             async(_,{date,item,times,setTimes,weight,restTime},
                 {loggedInUser,client})=>{
                     const newItem = await client.item.create({
@@ -16,9 +16,8 @@ const resolvers:Resolvers = {
                     }})
                     const isdate = await client.record.findUnique({where:{date},select:{id:true}});
                     if(isdate){
-                        const oldRecord = await client.record.findUnique({where:{id:isdate.id}});
                         await client.record.update({
-                            where:{id:oldRecord.id},
+                            where:{id:isdate.id},
                             data:{
                                 items:{
                                     connect:{

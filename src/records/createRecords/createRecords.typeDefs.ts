@@ -1,18 +1,18 @@
 import { gql } from "apollo-server-express";
 
 export default gql`
-    type CreateRecordResult {
+    type OrganizeRecordResult {
         ok: Boolean!
         error: String
     }
     type Mutation {
-        createRecord(
+        organizeRecord(
             date:String!, 
             item:String!, 
             times:Int,
             setTimes:Int,
             weight:Int,
             restTime:Int,
-        ):CreateRecordResult!
+        ):OrganizeRecordResult!
     }
 `;

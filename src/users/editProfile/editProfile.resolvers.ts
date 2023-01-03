@@ -7,8 +7,7 @@ const resolvers:Resolvers = {
     Mutation: {
         editProfile: protectedResolver(
             async(_,
-                {firstName,
-                lastName,
+                {
                 username,
                 email,
                 password:newPassword,
@@ -29,8 +28,6 @@ const resolvers:Resolvers = {
                             id:loggedInUser?.id
                         },
                         data:{
-                            firstName,
-                            lastName,
                             username,
                             email,
                             ...(uglyPassword && {password:uglyPassword})

@@ -5,8 +5,6 @@ import { Resolvers } from "../../type"
 const resolvers:Resolvers = {
     Mutation: {
         createAccount: async (_,{
-            firstName,
-            lastName,
             username,
             email,
             password,
@@ -30,8 +28,6 @@ const resolvers:Resolvers = {
             }
             const uglyPassword = await bcrypt.hash(password,10);
             await client.user.create({data:{
-                    firstName,
-                    lastName,
                     username,
                     email,
                     password:uglyPassword

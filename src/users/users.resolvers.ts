@@ -1,4 +1,5 @@
 import { Resolvers } from "../type";
+import { protectedResolver } from "./users.utils";
 
 
 const resolvers:Resolvers = {
@@ -8,7 +9,19 @@ const resolvers:Resolvers = {
                 return false
             }
             return id === loggedInUser.id
-        }
+        },
+        records: protectedResolver(
+            async({id},__,{loggedInUser,client})=>{
+                if(!loggedInUser){
+                    return false
+                }
+                return await client.record.findMany({
+                    where:{userId:id},
+                    select:{date:true,items:true},
+                    take:3
+                })
+            }
+        )
     }
 }
 

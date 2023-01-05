@@ -8,7 +8,8 @@ const resolvers:Resolvers ={
                 belong:{
                     some:{id}
                 }
-            }}
+            },
+            }
         )
     }
 }

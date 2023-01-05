@@ -7,6 +7,7 @@ export default gql`
         email: String!
         bio: String
         avatar: String
+        records: [Record]
         createdAt: String!
         updatedAt: String!
         isMe: Boolean!

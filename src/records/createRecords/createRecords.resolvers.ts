@@ -3,12 +3,12 @@ import { protectedResolver } from "../../users/users.utils";
 
 const resolvers:Resolvers = {
     Mutation:{
-        organizeRecord:protectedResolver(
-            async(_,{date,item,times,setTimes,weight,restTime},
+        createRecord:protectedResolver(
+            async(_,{date,name,times,setTimes,weight,restTime},
                 {loggedInUser,client})=>{
                     const newItem = await client.item.create({
                         data:{
-                            name:item,
+                            name,
                             times,
                             setTimes,
                             weight,

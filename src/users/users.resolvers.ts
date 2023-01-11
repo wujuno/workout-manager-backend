@@ -17,7 +17,7 @@ const resolvers:Resolvers = {
                 }
                 return await client.record.findMany({
                     where:{userId:id},
-                    select:{date:true,items:true},
+                    select:{id:true,date:true,items:true},
                     take:3
                 })
             }

@@ -2,7 +2,11 @@ import { Resolvers } from "../../type";
 
 const resolvers:Resolvers = {
     Query: {
-        seeRecord: (_,{id},{client}) => client.record.findUnique({where:{id}})
+        seeRecord: (_,{date},{client,loggedInUser}) => client.record.findFirst(
+            {where:{
+                date,
+                userId: loggedInUser.id
+            }})
     }
 }
 

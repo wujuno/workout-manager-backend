@@ -5,12 +5,15 @@
   "scripts": {
     "dev": "nodemon --exec ts-node src/server --ext ts,js",
     "migrate": "npx prisma migrate dev",
-    "studio": "npx prisma studio"
+    "studio": "npx prisma studio",
+    "build": "npx tsc",
+    "start": "node built/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/cli": "^7.20.7",
     "@graphql-tools/load-files": "^6.6.1",
     "@graphql-tools/merge": "^8.3.14",
     "@graphql-tools/schema": "^9.0.12",

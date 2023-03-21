@@ -14,7 +14,7 @@ const resolvers: Resolvers = {
         return false;
       }
       return await client.record.findMany({
-        orderBy: { createdAt: "desc" },
+        orderBy: { date: "desc" },
         where: { userId: id },
         select: { id: true, date: true, items: true },
         take: 3,
